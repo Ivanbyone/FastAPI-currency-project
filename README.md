@@ -1,0 +1,1 @@
+## FastAPI Currency project
