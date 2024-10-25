@@ -16,7 +16,7 @@ class GetCurrencyListUseCase:
                 "x-cg-pro-api-key": settings.API_KEY
             },
             url='https://api.coingecko.com/api/v3/coins/list')
-        self.redis_client: RedisBase = RedisClient()
+        self.redis_client: RedisBase = RedisClient(host=settings.REDIS_HOST, port=settings.REDIS_PORT)
 
     async def __call__(self) -> CurrencyListDTO:
         """ """
