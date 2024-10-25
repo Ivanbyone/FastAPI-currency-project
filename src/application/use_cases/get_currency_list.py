@@ -22,11 +22,9 @@ class GetCurrencyListUseCase:
         """ """
         data = await self.redis_client.get_cached(key="currency")
         if data is not None:
-            print("Using cached by Redis")
             return data
 
         response = await self.client.get_method()
-        print("Using API call")
         keys = ['name', 'symbol']
         filtered_response = [
             {k: item[k].upper() for k in keys if k in item}
