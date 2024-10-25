@@ -7,8 +7,6 @@ from typing import Protocol, Any
 
 import aioredis
 
-from src.factory.config import settings
-
 
 class RedisBase(Protocol):
 
@@ -27,8 +25,8 @@ class RedisBase(Protocol):
 
 class RedisClient:
 
-    def __init__(self):
-        self.redis = aioredis.from_url(url=f'redis://{settings.REDIS_HOST}:{settings.REDIS_PORT}')
+    def __init__(self, host: str, port: int):
+        self.redis = aioredis.from_url(url=f'redis://{host}:{port}')
 
     async def cached(self, key: str, value: Any, ttl: int):
         serialized_data = json.dumps(value, ensure_ascii=False)
